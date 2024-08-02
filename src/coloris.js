@@ -127,31 +127,60 @@ return ((window, document, Math, undefined) => {
           break;
         case 'swatches':
           if (Array.isArray(options.swatches)) {
-            const swatchesContainer = getEl('clr-swatches');
-            const swatches = document.createElement('div');
+            if(typeof options.swatches[0] === 'string'){
+              const swatchesContainer = getEl('clr-swatches');
+              const swatches = document.createElement('div');
 
-            // Clear current swatches
-            swatchesContainer.textContent = '';
+              // Clear current swatches
+              swatchesContainer.textContent = '';
 
-            // Build new swatches
-            options.swatches.forEach((swatch, i) => {
-              const button = document.createElement('button');
+              // Build new swatches
+              options.swatches.forEach((swatch, i) => {
+                const button = document.createElement('button');
 
-              button.setAttribute('type', `button`);
-              button.setAttribute('id', `clr-swatch-${i}`);
-              button.setAttribute('aria-labelledby', `clr-swatch-label clr-swatch-${i}`);
-              button.style.color = swatch;
-              button.textContent = swatch;
+                button.setAttribute('type', `button`);
+                button.setAttribute('id', `clr-swatch-${i}`);
+                button.setAttribute('aria-labelledby', `clr-swatch-label clr-swatch-${i}`);
+                button.style.color = swatch;
+                button.textContent = swatch;
 
-              swatches.appendChild(button);
-            });
+                swatches.appendChild(button);
+              });
 
-            // Append new swatches if any
-            if (options.swatches.length) {
-              swatchesContainer.appendChild(swatches);
+              // Append new swatches if any
+              if (options.swatches.length) {
+                swatchesContainer.appendChild(swatches);
+              }
+
+              settings.swatches = options.swatches.slice();
+            } else if(typeof options.swatches[0] === 'object'){
+              const swatchesContainer = getEl('clr-swatches');
+              const swatches = document.createElement('div');
+
+              // Clear current swatches
+              swatchesContainer.textContent = '';
+
+              // Build new swatches
+              options.swatches.forEach((swatch, i) => {
+                const button = document.createElement('button');
+
+                button.setAttribute('type', `button`);
+                button.setAttribute('id', `clr-swatch-${i}`);
+                button.setAttribute('aria-labelledby', `clr-swatch-label clr-swatch-${i}`);
+                button.style.color = swatch.color;
+                button.title = swatch.label;
+                button.textContent = swatch.color;
+
+                swatches.appendChild(button);
+              });
+
+              // Append new swatches if any
+              if (options.swatches.length) {
+                swatchesContainer.appendChild(swatches);
+              }
+
+              settings.swatches = options.swatches.slice();
             }
-
-            settings.swatches = options.swatches.slice();
           }
           break;
         case 'swatchesOnly':

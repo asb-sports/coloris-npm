@@ -10,6 +10,8 @@ Convert any text input field into a color field.
 
 Forked from https://github.com/mdbassit/Coloris so we could provide TypeScript and NPM support. Head over to Momo Bassit's original repo for user documentation.
 
+### This is a fork that adds the ability to have labels on the color swatches.
+
 ## Bundlers
 
 See [the tests directory](./test-npm) for examples with different bundlers.

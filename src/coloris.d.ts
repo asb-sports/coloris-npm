@@ -284,7 +284,7 @@ declare namespace Coloris {
      *
      * @default []
      */
-    swatches?: string[];
+    swatches?: string[] | {color: string; label: string;}[];
     
     /**
      * A function that is called whenever a new color is picked.
